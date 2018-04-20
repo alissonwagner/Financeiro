@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>Nome</th>
+        <th>Rendimento Mensal</th>
+        <th>Ação</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="cliente: ${clientes}">
+        <td th:text="${cliente.nome}">Oranges</td>
+        <td th:text="${cliente.rendimentoMensal}">0.99</td>
+        <td><a th:href="@{/cliente/{id}(id=${cliente.id})}">Detalhar</a></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

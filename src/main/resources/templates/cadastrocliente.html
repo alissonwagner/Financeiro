@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Cadastro de Cliente</title>
+        <link rel="stylesheet" type="text/css" media="all" href="../static/css/bootstrap.css" th:href="@{/static/css/bootstrap.css}"/>
+    </head>
+    <body>
+        <form action="/cliente/salvar" method="post">
+            <div class="form-group row">
+                <label for="nome" class="col-sm-2 col-form-label">Nome</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control-plaintext" id="nome" name="nome" placeholder="Nome"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="rendimentoMensal" class="col-sm-2 col-form-label">Password</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="rendimentoMensal" name="rendimentoMensal" placeholder="Rendimento mensal"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <button type="submit">Enviar</button>
+            </div>
+        </form>
+    </body>
+</html>
