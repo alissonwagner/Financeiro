@@ -1,10 +1,10 @@
 package br.com.alisson.financeira.to;
 
-import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-@Builder
+@NoArgsConstructor
 public class EnderecoTo {
     private Long id;
     private String logradouro;

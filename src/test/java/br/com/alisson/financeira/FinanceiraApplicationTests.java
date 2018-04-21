@@ -1,6 +1,7 @@
 package br.com.alisson.financeira;
 
 import br.com.alisson.financeira.bo.ParcelaBo;
+import br.com.alisson.financeira.enumeration.RiscoEnum;
 import br.com.alisson.financeira.service.FinanceiroService;
 import lombok.NoArgsConstructor;
 import org.junit.Assert;
@@ -32,6 +33,24 @@ public class FinanceiraApplicationTests {
         ParcelaBo esperado = new ParcelaBo(12, BigDecimal.valueOf(833.33).setScale(2), BigDecimal.valueOf(10000).setScale(2), BigDecimal.valueOf(10000).setScale(2));
         ParcelaBo resultado = financeiroService.calculaParcelamento(BigDecimal.valueOf(10000), 12, BigDecimal.ZERO);
         Assert.assertEquals(esperado, resultado);
+    }
+
+    @Test
+    public void testarFaixaRiscoA() {
+        RiscoEnum risco = financeiroService.getFaixaRiscoCliente(BigDecimal.valueOf(1950.93));
+        Assert.assertEquals(RiscoEnum.C, risco);
+    }
+
+    @Test
+    public void testarFaixaRiscoB() {
+        RiscoEnum risco = financeiroService.getFaixaRiscoCliente(BigDecimal.valueOf(3509.09));
+        Assert.assertEquals(RiscoEnum.B, risco);
+    }
+
+    @Test
+    public void testarFaixaRiscoC() {
+        RiscoEnum risco = financeiroService.getFaixaRiscoCliente(BigDecimal.valueOf(10000));
+        Assert.assertEquals(RiscoEnum.A, risco);
     }
 
 }

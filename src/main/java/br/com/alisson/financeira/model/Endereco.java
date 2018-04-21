@@ -1,22 +1,23 @@
 package br.com.alisson.financeira.model;
 
+import java.io.Serializable;
 import lombok.*;
 
 import javax.persistence.*;
 
-@Getter @Setter
+@Data
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @Entity
 @Table(name = "endereco")
-public class Endereco {
+public class Endereco implements Serializable {
+
     @Id
+    @Column(name = "ID", nullable = false)
     @GeneratedValue
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "clienteid", referencedColumnName = "id")
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "clienteid", referencedColumnName = "ID")
     private Cliente cliente;
     private String logradouro;
     private Integer numero;

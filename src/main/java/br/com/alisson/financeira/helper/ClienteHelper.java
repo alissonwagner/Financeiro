@@ -12,8 +12,8 @@ public class ClienteHelper {
 
     public static List<ClienteTo> toClienteTo(List<Cliente> clientes) {
         List<ClienteTo> retonro = new ArrayList<>();
-        clientes.forEach(cliente ->
-                retonro.add(toClienteTo(cliente))
+        clientes.forEach(cliente
+                -> retonro.add(toClienteTo(cliente))
         );
 
         return retonro;
@@ -25,16 +25,15 @@ public class ClienteHelper {
         Endereco endereco = cliente.getEndereco();
 
         if (endereco != null) {
-            enderecoTo = EnderecoTo.builder()
-                    .cep(endereco.getCep())
-                    .cidade(endereco.getCidade())
-                    .complemento(endereco.getComplemento())
-                    .estado(endereco.getEstado())
-                    .id(endereco.getId())
-                    .logradouro(endereco.getLogradouro())
-                    .numero(endereco.getNumero())
-                    .referencia(endereco.getReferencia())
-                    .build();
+            enderecoTo = new EnderecoTo();
+            enderecoTo.setCep(endereco.getCep());
+            enderecoTo.setCidade(endereco.getCidade());
+            enderecoTo.setComplemento(endereco.getComplemento());
+            enderecoTo.setEstado(endereco.getEstado());
+            enderecoTo.setId(endereco.getId());
+            enderecoTo.setLogradouro(endereco.getLogradouro());
+            enderecoTo.setNumero(endereco.getNumero());
+            enderecoTo.setReferencia(endereco.getReferencia());
         }
 
         ClienteTo clienteTo = new ClienteTo();

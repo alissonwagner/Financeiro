@@ -1,66 +1,75 @@
 package br.com.alisson.financeira.controller;
 
+import br.com.alisson.financeira.ResourceNotFoundException;
 import br.com.alisson.financeira.helper.ClienteHelper;
 import br.com.alisson.financeira.model.Cliente;
-import br.com.alisson.financeira.repository.ClienteRepository;
-import br.com.alisson.financeira.repository.EnderecoRepository;
+import br.com.alisson.financeira.service.ClienteService;
+import br.com.alisson.financeira.service.FinanceiroService;
 import br.com.alisson.financeira.to.ClienteTo;
-import java.math.BigDecimal;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
-import java.util.Optional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
+@RequestMapping("/cliente")
 @RequiredArgsConstructor
 public class ClienteController {
 
-    private final ClienteRepository clienteRepository;
-    private final EnderecoRepository enderecoRepository;
+    private final ClienteService clienteService;
+    private final FinanceiroService financeiroService;
 
-    @RequestMapping(path = "/", method = RequestMethod.GET)
-    public String index() {
-        return "cadastrocliente";
+    @GetMapping("/list")
+    public ResponseEntity<List<ClienteTo>> list() {
+        List<ClienteTo> clientes = ClienteHelper.toClienteTo(clienteService.getTodosClientes());
+        return new ResponseEntity<>(clientes, HttpStatus.OK);
     }
 
-    @RequestMapping(path = "/cliente/list", method = RequestMethod.GET)
-    public String list(Model model) {
-        List<ClienteTo> clientes = ClienteHelper.toClienteTo(clienteRepository.findAll());
-        model.addAttribute("clientes", clientes);
-        return "index";
-    }
-//    @ResponseBody
-
-    @RequestMapping(path = "/cliente/{codigo}", method = RequestMethod.GET)
-    public String get(@PathVariable("codigo") Long codigo, Model model) {
-        String retorno = "detalhecliente";
-        Cliente cliente = clienteRepository.findOne(codigo);
+    @GetMapping(path = "/{codigo}")
+    public ResponseEntity<ClienteTo> get(@PathVariable("codigo") Long codigo) {
+        Cliente cliente = clienteService.getCliente(codigo);
 
         if (cliente == null) {
-            retorno = "redirect:/";
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
-            model.addAttribute("cliente", ClienteHelper.toClienteTo(cliente));
+            ClienteTo clienteTo = ClienteHelper.toClienteTo(cliente);
+            clienteTo.setRisco(financeiroService.getFaixaRiscoCliente(cliente.getRendimentoMensal()).name());
+            return new ResponseEntity<>(clienteTo, HttpStatus.OK);
         }
-
-        return retorno;
     }
 
-    @RequestMapping(path = "/cliente/salvar", method = RequestMethod.POST)
-    public String salvar(ClienteTo cliente) {
-        Cliente clienteModel = new Cliente();
-        clienteModel.setId(cliente.getId());
-        clienteModel.setNome(cliente.getNome());
-        clienteModel.setRendimentoMensal(cliente.getRendimentoMensal());
+    @PutMapping(path = "/salvar")
+    public ResponseEntity<ClienteTo> alterar(@RequestBody ClienteTo cliente) {
+        try {
+            Cliente clienteModel = clienteService.updateCliente(cliente);
+            return new ResponseEntity<>(ClienteHelper.toClienteTo(clienteModel), HttpStatus.OK);
+        } catch (ResourceNotFoundException e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
 
-        clienteRepository.save(clienteModel);
-        System.out.println(cliente.toString());
-        return "redirect:/cliente/" + cliente.getId();
+    @PostMapping(path = "/salvar")
+    public ResponseEntity<ClienteTo> salvar(@RequestBody ClienteTo cliente) {
+        Cliente clienteModel = clienteService.insertCliente(cliente);
+        return new ResponseEntity<>(ClienteHelper.toClienteTo(clienteModel), HttpStatus.CREATED);
+    }
+
+    @DeleteMapping(path = "/{codigo}")
+    public ResponseEntity apagar(@PathVariable("codigo") Long codigo) {
+        try {
+            clienteService.apagarCliente(codigo);
+        } catch (ResourceNotFoundException e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity(HttpStatus.OK);
     }
 }

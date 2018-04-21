@@ -1,6 +1,7 @@
 package br.com.alisson.financeira.service.imp;
 
 import br.com.alisson.financeira.bo.ParcelaBo;
+import br.com.alisson.financeira.enumeration.RiscoEnum;
 import br.com.alisson.financeira.service.FinanceiroService;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +11,30 @@ import java.math.RoundingMode;
 
 @Service
 public class FinanceiroServiceImp implements FinanceiroService {
+
+    /**
+     * Se o rendimento mensal for menor ou igual a 2000, o risco deverá ser C.
+     * Se o rendimento mensal for maior que 2000 e menor ou igual a 8000, o
+     * risco deverá ser B. Se o rendimento mensal for maior que 8000, o risco
+     * deverá ser A.
+     *
+     * @param rendimento 
+     * @return Enum de risico
+     */
+    @Override
+    public RiscoEnum getFaixaRiscoCliente(BigDecimal rendimento) {
+        RiscoEnum retorno;
+
+        if (rendimento.compareTo(BigDecimal.valueOf(2000)) <= 0) {
+            retorno = RiscoEnum.C;
+        } else if (rendimento.compareTo(BigDecimal.valueOf(8000)) <= 0) {
+            retorno = RiscoEnum.B;
+        } else {
+            retorno = RiscoEnum.A;
+        }
+
+        return retorno;
+    }
 
     @Override
     public ParcelaBo calculaParcelamento(BigDecimal valorOriginal, Integer parcelas, BigDecimal juros) {

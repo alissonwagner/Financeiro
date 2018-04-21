@@ -7,13 +7,13 @@ public enum RiscoEnum {
     B(BigDecimal.valueOf(5)),
     C(BigDecimal.valueOf(10));
 
-    private BigDecimal juro;
+    private final BigDecimal juro;
 
     RiscoEnum(BigDecimal juro) {
         this.juro = juro;
     }
 
-    public BigDecimal getJuro() {
+    public  BigDecimal getJuro() {
         return juro;
     }
 }
