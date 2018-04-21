@@ -1,0 +1,139 @@
+{
+	"info": {
+		"name": "Financeiro",
+		"_postman_id": "665a40f1-1d2b-4603-a105-875b386d73b0",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "List",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:8080/cliente/list",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cliente",
+						"list"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Post salvar",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \n    \"nome\": \"Alisson Wagner\",\n    \"rendimentoMensal\": 8000.70,\n    \"endereco\": {\n        \"logradouro\": \"Felinto Chacon\",\n        \"numero\": 450,\n        \"cep\": 92500000,\n        \"cidade\": \"Guaíba\",\n        \"estado\": \"RS\",\n        \"complemento\": null,\n        \"referencia\": null\n    }\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/cliente/salvar",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cliente",
+						"salvar"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Put Salvar",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 3,\n    \"nome\": \"Alisson Wagner Rodrigues\",\n    \"rendimentoMensal\": 8000.7,\n    \"endereco\": {\n        \"id\": 5,\n        \"logradouro\": \"Felinto Chacon\",\n        \"numero\": 450,\n        \"cep\": 92500000,\n        \"cidade\": \"Guaíba\",\n        \"estado\": \"RS\",\n        \"complemento\": null,\n        \"referencia\": null\n    }\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/cliente/salvar",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cliente",
+						"salvar"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:8080/cliente/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cliente",
+						"1"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Simulação",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"valor\" : 10000,\n\t\"prestacoes\": 10,\n\t\"cliente\" : 4\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/emprestimo/simulacao",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"emprestimo",
+						"simulacao"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
