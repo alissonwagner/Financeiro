@@ -1,6 +1,6 @@
 package br.com.alisson.financeira.controller;
 
-import br.com.alisson.financeira.ResourceNotFoundException;
+import br.com.alisson.financeira.exception.ResourceNotFoundException;
 import br.com.alisson.financeira.helper.ClienteHelper;
 import br.com.alisson.financeira.model.Cliente;
 import br.com.alisson.financeira.service.ClienteService;

@@ -1,6 +1,6 @@
 package br.com.alisson.financeira.service.imp;
 
-import br.com.alisson.financeira.ResourceNotFoundException;
+import br.com.alisson.financeira.exception.ResourceNotFoundException;
 import br.com.alisson.financeira.model.Cliente;
 import br.com.alisson.financeira.model.Endereco;
 import br.com.alisson.financeira.repository.ClienteRepository;

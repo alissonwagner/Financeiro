@@ -1,4 +1,4 @@
-package br.com.alisson.financeira;
+package br.com.alisson.financeira.exception;
 
 public class ResourceNotFoundException extends RuntimeException {
 
