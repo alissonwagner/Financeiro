@@ -1,6 +1,6 @@
 package br.com.alisson.financeira.service.imp;
 
-import br.com.alisson.financeira.bo.ParcelaBo;
+import br.com.alisson.financeira.to.SimulacaoEmprestimoTo;
 import br.com.alisson.financeira.enumeration.RiscoEnum;
 import br.com.alisson.financeira.service.FinanceiroService;
 import org.springframework.stereotype.Service;
@@ -37,8 +37,8 @@ public class FinanceiroServiceImp implements FinanceiroService {
     }
 
     @Override
-    public ParcelaBo calculaParcelamento(BigDecimal valorOriginal, Integer parcelas, BigDecimal juros) {
-        ParcelaBo retorno;
+    public SimulacaoEmprestimoTo calculaParcelamento(BigDecimal valorOriginal, Integer parcelas, BigDecimal juros) {
+        SimulacaoEmprestimoTo retorno;
 
         /*
         * Não é usado equals por considerar a escala.
@@ -55,15 +55,16 @@ public class FinanceiroServiceImp implements FinanceiroService {
         return retorno;
     }
 
-    private static ParcelaBo calculaParcelamentoSemJuros(BigDecimal valorOriginal, Integer parcelas, BigDecimal juros) {
+    private static SimulacaoEmprestimoTo calculaParcelamentoSemJuros(BigDecimal valorOriginal, Integer parcelas, BigDecimal juros) {
         valorOriginal = valorOriginal.setScale(2, RoundingMode.HALF_UP);
-        return new ParcelaBo(parcelas,
+        return new SimulacaoEmprestimoTo(parcelas,
                 valorOriginal.divide(BigDecimal.valueOf(parcelas), RoundingMode.HALF_UP),
                 valorOriginal,
-                valorOriginal);
+                valorOriginal,
+                BigDecimal.ZERO);
     }
 
-    private static ParcelaBo calculaParcelamentoComJuros(BigDecimal valorOriginal, Integer parcelas, BigDecimal juros) {
+    private static SimulacaoEmprestimoTo calculaParcelamentoComJuros(BigDecimal valorOriginal, Integer parcelas, BigDecimal juros) {
         BigDecimal jurosDecimal = juros.divide(BigDecimal.valueOf(100));
 
         BigDecimal coeficienteJuros = jurosDecimal
@@ -75,6 +76,6 @@ public class FinanceiroServiceImp implements FinanceiroService {
         BigDecimal valorParcela = valorOriginal.multiply(coeficienteJuros).setScale(2, RoundingMode.HALF_UP);
         BigDecimal valorTotal = valorParcela.multiply(BigDecimal.valueOf(parcelas)).setScale(2);
 
-        return new ParcelaBo(parcelas, valorParcela, valorTotal, valorOriginal.setScale(2));
+        return new SimulacaoEmprestimoTo(parcelas, valorParcela, valorTotal, valorOriginal.setScale(2), null);
     }
 }

@@ -13,7 +13,7 @@ public enum RiscoEnum {
         this.juro = juro;
     }
 
-    public  BigDecimal getJuro() {
+    public BigDecimal getJuro() {
         return juro;
     }
 }
