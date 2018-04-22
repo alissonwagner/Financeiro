@@ -13,11 +13,11 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "localhost:8080/cliente/list",
+					"raw": "localhost:8081/cliente/list",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8081",
 					"path": [
 						"cliente",
 						"list"
@@ -39,14 +39,14 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \n    \"nome\": \"Alisson Wagner\",\n    \"rendimentoMensal\": 8000.70,\n    \"endereco\": {\n        \"logradouro\": \"Felinto Chacon\",\n        \"numero\": 450,\n        \"cep\": 92500000,\n        \"cidade\": \"Guaíba\",\n        \"estado\": \"RS\",\n        \"complemento\": null,\n        \"referencia\": null\n    }\n}"
+					"raw": "{\n    \n    \"nome\": \"Alisson Wagner asdas kjlklkl\",\n    \"rendimentoMensal\": 9000,\n    \"endereco\": {\n        \"logradouro\": \"Felinto Chacon\",\n        \"numero\": 450,\n        \"cep\": 92500000,\n        \"cidade\": \"Guaíba\",\n        \"estado\": \"RS\",\n        \"complemento\": null,\n        \"referencia\": null\n    }\n}"
 				},
 				"url": {
-					"raw": "localhost:8080/cliente/salvar",
+					"raw": "localhost:8081/cliente/salvar",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8081",
 					"path": [
 						"cliente",
 						"salvar"
@@ -68,14 +68,14 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id\": 3,\n    \"nome\": \"Alisson Wagner Rodrigues\",\n    \"rendimentoMensal\": 8000.7,\n    \"endereco\": {\n        \"id\": 5,\n        \"logradouro\": \"Felinto Chacon\",\n        \"numero\": 450,\n        \"cep\": 92500000,\n        \"cidade\": \"Guaíba\",\n        \"estado\": \"RS\",\n        \"complemento\": null,\n        \"referencia\": null\n    }\n}"
+					"raw": "{\n    \"id\": 3,\n    \"nome\": \"Alisson Wagner Rodrigues\",\n    \"rendimentoMensal\": 8000.7,\n    \"endereco\": {\n        \"id\": 5,\n        \"logradouro\": \"Felinto Chasd asd acon\",\n        \"numero\": 450,\n        \"cep\": 92500000,\n        \"cidade\": \"Guaíba\",\n        \"estado\": \"RS\",\n        \"complemento\": null,\n        \"referencia\": null\n    }\n}"
 				},
 				"url": {
-					"raw": "localhost:8080/cliente/salvar",
+					"raw": "localhost:8081/cliente/salvar",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8081",
 					"path": [
 						"cliente",
 						"salvar"
@@ -92,14 +92,14 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "localhost:8080/cliente/1",
+					"raw": "localhost:8081/cliente/3",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8081",
 					"path": [
 						"cliente",
-						"1"
+						"3"
 					]
 				},
 				"description": ""
@@ -118,14 +118,14 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"valor\" : 10000,\n\t\"prestacoes\": 10,\n\t\"cliente\" : 4\n}"
+					"raw": "{\n\t\"valor\" : 10000,\n\t\"prestacoes\": 10,\n\t\"cliente\" : 9\n}"
 				},
 				"url": {
-					"raw": "localhost:8080/emprestimo/simulacao",
+					"raw": "localhost:8081/emprestimo/simulacao",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8081",
 					"path": [
 						"emprestimo",
 						"simulacao"

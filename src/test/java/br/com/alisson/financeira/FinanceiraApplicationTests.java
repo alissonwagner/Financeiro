@@ -23,14 +23,14 @@ public class FinanceiraApplicationTests {
 
     @Test
     public void testarCalculoComJuros() {
-        SimulacaoEmprestimoTo esperado = new SimulacaoEmprestimoTo(12, BigDecimal.valueOf(916.80).setScale(2), BigDecimal.valueOf(11001.60).setScale(2), BigDecimal.valueOf(10000).setScale(2));
+        SimulacaoEmprestimoTo esperado = new SimulacaoEmprestimoTo(12, BigDecimal.valueOf(916.80).setScale(2), BigDecimal.valueOf(11001.60).setScale(2), BigDecimal.valueOf(10000).setScale(2), null);
         SimulacaoEmprestimoTo resultado = financeiroService.calculaParcelamento(BigDecimal.valueOf(10000), 12, BigDecimal.valueOf(1.5));
         Assert.assertEquals(esperado, resultado);
     }
 
     @Test
     public void testarCalculoSemJuros() {
-        SimulacaoEmprestimoTo esperado = new SimulacaoEmprestimoTo(12, BigDecimal.valueOf(833.33).setScale(2), BigDecimal.valueOf(10000).setScale(2), BigDecimal.valueOf(10000).setScale(2));
+        SimulacaoEmprestimoTo esperado = new SimulacaoEmprestimoTo(12, BigDecimal.valueOf(833.33).setScale(2), BigDecimal.valueOf(10000).setScale(2), BigDecimal.valueOf(10000).setScale(2), BigDecimal.ZERO);
         SimulacaoEmprestimoTo resultado = financeiroService.calculaParcelamento(BigDecimal.valueOf(10000), 12, BigDecimal.ZERO);
         Assert.assertEquals(esperado, resultado);
     }
