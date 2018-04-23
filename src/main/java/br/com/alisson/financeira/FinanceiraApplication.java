@@ -19,8 +19,8 @@ public class FinanceiraApplication {
         return new WebMvcConfigurerAdapter() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/cliente/*").allowedOrigins("http://localhost:8080");
-                registry.addMapping("/emprestimo/*").allowedOrigins("http://localhost:8080");
+                registry.addMapping("/cliente/*").allowedOrigins("http://localhost:8080").allowedMethods("*");
+                registry.addMapping("/emprestimo/*").allowedOrigins("http://localhost:8080").allowedMethods("*");
             }
         };
     }

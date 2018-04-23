@@ -51,7 +51,9 @@ public class ClienteController {
     public ResponseEntity<ClienteTo> alterar(@RequestBody ClienteTo cliente) {
         try {
             Cliente clienteModel = clienteService.updateCliente(cliente);
-            return new ResponseEntity<>(ClienteHelper.toClienteTo(clienteModel), HttpStatus.OK);
+            ClienteTo clienteTo = ClienteHelper.toClienteTo(clienteModel);
+            clienteTo.setRisco(financeiroService.getFaixaRiscoCliente(clienteTo.getRendimentoMensal()).name());
+            return new ResponseEntity<>(clienteTo, HttpStatus.OK);
         } catch (ResourceNotFoundException e) {
             return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
         }
@@ -60,7 +62,9 @@ public class ClienteController {
     @PostMapping(path = "/salvar")
     public ResponseEntity<ClienteTo> salvar(@RequestBody ClienteTo cliente) {
         Cliente clienteModel = clienteService.insertCliente(cliente);
-        return new ResponseEntity<>(ClienteHelper.toClienteTo(clienteModel), HttpStatus.CREATED);
+        ClienteTo clienteTo = ClienteHelper.toClienteTo(clienteModel);
+        clienteTo.setRisco(financeiroService.getFaixaRiscoCliente(clienteTo.getRendimentoMensal()).name());
+        return new ResponseEntity<>(clienteTo, HttpStatus.CREATED);
     }
 
     @DeleteMapping(path = "/{codigo}")
